@@ -9,15 +9,15 @@ var specialChar =  ['!', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', 
 
 // Write password to the #password input
 function writePassword() {
-  var charList = []; //creates array based on the criterias selected by user
 
   //ask user for password length
-  var charLength = Number(window.prompt("How long do you want your password to be? Choose between 8 to 128 characters.")); 
-    if (charLength < 8 || charLength > 128 || Number.isNaN(charLength)) {
-      window.alert("Invalid number! Must be between 8 and 128.");
-      return;
-    } 
+var charLength = Number(window.prompt("How long do you want your password to be? Choose between 8 to 128 characters.")); 
+  if (charLength < 8 || charLength > 128 || Number.isNaN(charLength)) {
+    window.alert("Invalid number! Must be between 8 and 128.");
+    return;
+  } 
 
+var charList = []; //creates array based on the criterias selected by user
    // ask user for char types to be included
   var upperChoice = window.confirm("Include uppercase letters? Hit OK to confirm."); 
     if (upperChoice === true) {
@@ -39,7 +39,13 @@ function writePassword() {
       charList = charList.concat(specialChar);
     }
 
-    // console log to check if choices went through properly
+//check that at least 1 criteria selected, used the length of the shortest array of the choices
+if (charList < numerical.length) {
+  window.alert("Invalid critera! Please confirm at least one character type to be included.");
+  return;
+}
+
+// console log to check if choices went through properly
   console.log("Password length is " + charLength);
   console.log("Uppercase: " + upperChoice);
   console.log("Lowercase: " + lowerChoice);
@@ -49,7 +55,7 @@ function writePassword() {
  
   var finalPass = []; //array for final password
     for(var i = 0; i < charLength; i++) { // for loop to generate the final password
-      var random = Math.floor(Math.random()* charList.length); //generate a random number based on the newPass array
+      var random = Math.floor(Math.random()* charList.length); //generate a random number based on the charList array
       console.log(random);
       finalPass.push(charList[random]); //array items will randomly be selected based on the charList & be appended to form final password
     }
